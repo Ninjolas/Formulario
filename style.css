@@ -1,0 +1,47 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: lightgrey;
+}
+
+.border{
+    border: 1px solid black;
+    width: 200px;
+    margin: 10px auto;
+}
+
+.main{
+    text-align: center;
+    margin: 20px auto;
+    width: 1000px;
+    background-color: white;
+    min-height: 250px;
+}
+
+.perguntas{
+    margin: 20px auto;
+    width: 200px;
+}
+
+
+.resposta{
+    margin: 5px;
+}
+
+input[type=button]{
+    border-radius: 10px;
+    width: 100px;
+    background-color: lightgrey;
+    margin: 20px auto;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 830px){
+    .main{width:100%;text-align: center;}
+}
+
+

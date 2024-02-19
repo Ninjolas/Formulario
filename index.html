@@ -1,0 +1,128 @@
+<html>
+
+<head>
+    <title>Perguntas e respostas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="main">
+
+        <input type="button" value="Adcionar" onclick="functionClick()">
+
+
+        
+
+    </div>
+
+    <script>
+
+        function functionClick() {
+
+            let pergunta = prompt("Digite uma pergunta: ");
+
+            let respostas = prompt("Digite quantas repostas serão: ");
+
+            var respostasArray = [];
+
+            for (var i = 0; i < respostas; i++) {
+                var resposta = prompt("Resposta " + (i + 1) + ": ");
+                respostasArray.push(resposta);
+            }
+
+            var correta = prompt("Digite qual a resposta correta: ");
+
+            var new_correta = [];
+
+
+            if (correta >=1 && correta<= respostasArray.length) {
+                for (var i = 0; i < respostasArray.length; i++) {
+                    if (correta == i + 1) {
+                        new_correta[i] = "correta";
+                    }
+                    else {
+                        new_correta[i] = "incorreta";
+                    }
+                }
+
+                var boxMain = document.querySelector('.main');
+                var border = document.createElement('div');
+                border.classList.add('border');
+                boxMain.appendChild(border);
+                
+                var newForm = document.createElement('form');
+                newForm.classList.add('perguntas');
+                border.appendChild(newForm);
+
+                newForm.innerHTML += `
+                    <div class="title">
+                        <h1>`+ pergunta + `</h1>
+                    </div>
+                `;
+
+                var boxPerguntas = "";
+
+                for(var i = 0;i<respostasArray.length;i++){
+                        boxPerguntas += ` 
+                        <div class="resposta">
+                            <span>`+ respostasArray[i] + `</span>
+                            <input type="radio" name="pergunta`+boxMain.childElementCount+`" value="`+ new_correta[i] + `">
+                            <br>
+                        </div>
+                    </div>
+                        `;
+                    
+                }
+
+                newForm.innerHTML += boxPerguntas;
+            
+                var elementos = document.querySelectorAll('[type=radio]');
+
+                for (var i = 0; i < elementos.length; i++) {
+                    elementos[i].addEventListener('change', function (e) {
+
+                        let marcado = e.target.value;
+
+                        if (marcado == "correta") {
+
+                            let parentNode = e.target.parentNode;
+                            parentNode.style.backgroundColor = "#04b533";
+
+                            let els = parentNode.parentNode.querySelectorAll('[type=radio]');
+
+                            for (var j = 0; j < els.length; j++) {
+                                els[j].disabled = true;
+                            }
+
+                        } else if (marcado == "incorreta") {
+
+                            let parentNode = e.target.parentNode;
+                            parentNode.style.backgroundColor = "#c44404";
+
+                            let els = parentNode.parentNode.querySelectorAll('[type=radio]');
+
+                            for (var j = 0; j < els.length; j++) {
+                                els[j].disabled = true;
+
+                            }
+
+                            let correta = parentNode.parentNode.querySelector('[value=correta]')
+                            correta.parentNode.style.backgroundColor = "#04b533"
+                        }
+                    })
+                }
+            }
+            else {
+                alert("Inválido");
+            }
+
+
+
+        }
+
+
+    </script>
+
+</body>
+
+</html>
